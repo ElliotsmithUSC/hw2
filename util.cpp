@@ -1,0 +1,71 @@
+#include <iostream>
+#include <sstream>
+#include <cctype>
+#include <algorithm>
+#include <cstring>
+#include "util.h"
+
+using namespace std;
+std::string convToLower(std::string src)
+{
+    std::transform(src.begin(), src.end(), src.begin(), ::tolower);
+    return src;
+}
+
+/** Complete the code to convert a string containing a rawWord
+    to a set of words based on the criteria given in the assignment **/
+std::set<std::string> parseStringToWords(string rawWords)
+{
+	set<string> wordset;
+	string temphold;
+	int charcount=0;
+	char *cloc = &rawWords[0];
+	while(*cloc != '\0'){
+		if((int(*cloc)>=32 && int(*cloc) <48) || (int(*cloc)>= 58 && int(*cloc)<=64)
+		 || (int(*cloc)>=91 && int(*cloc)<=96) || (int(*cloc)>=123 && int(*cloc)<=126)){
+			if(charcount >= 2){
+				wordset.insert(temphold);
+			}
+			temphold.clear();
+			charcount=0;
+		}
+		else{
+			temphold.push_back(*cloc);
+			charcount++;
+		}
+	}
+	if(charcount >=2){
+		wordset.insert(temphold);
+	}
+
+return wordset;
+}
+
+/**************************************************
+ * COMPLETED - You may use the following functions
+ **************************************************/
+
+// Used from http://stackoverflow.com/questions/216823/whats-the-best-way-to-trim-stdstring
+// trim from start
+std::string &ltrim(std::string &s) {
+    s.erase(s.begin(), 
+	    std::find_if(s.begin(), 
+			 s.end(), 
+			 std::not1(std::ptr_fun<int, int>(std::isspace))));
+    return s;
+}
+
+// trim from end
+std::string &rtrim(std::string &s) {
+    s.erase(
+	    std::find_if(s.rbegin(), 
+			 s.rend(), 
+			 std::not1(std::ptr_fun<int, int>(std::isspace))).base(), 
+	    s.end());
+    return s;
+}
+
+// trim from both ends
+std::string &trim(std::string &s) {
+    return ltrim(rtrim(s));
+}
