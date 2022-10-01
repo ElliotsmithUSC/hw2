@@ -20,7 +20,9 @@ std::set<std::string> parseStringToWords(string rawWords)
 	string temphold;
 	int charcount=0;
 	char *cloc = &rawWords[0];
-	while(*cloc != '\0'){
+	int i=0;
+	while(*cloc != '\0'){//checks for if the character is punctuation and cuts the stream if so.
+		i++;
 		if((int(*cloc)>=32 && int(*cloc) <48) || (int(*cloc)>= 58 && int(*cloc)<=64)
 		 || (int(*cloc)>=91 && int(*cloc)<=96) || (int(*cloc)>=123 && int(*cloc)<=126)){
 			if(charcount >= 2){
@@ -33,6 +35,7 @@ std::set<std::string> parseStringToWords(string rawWords)
 			temphold.push_back(*cloc);
 			charcount++;
 		}
+		cloc = &rawWords[i];
 	}
 	if(charcount >=2){
 		wordset.insert(temphold);
