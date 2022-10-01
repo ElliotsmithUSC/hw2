@@ -104,7 +104,7 @@ int main(int argc, char* argv[])
 								int hitno;
 								if(ss >> usern){
 									ss >> hitno;
-                                    if(ds.usermap.find(convToLower(usern))){
+                                    if(ds.usermap.find(convToLower(usern)) != ds.usermap.end()){
 									    ds.AddToCart(ds.usermap[convToLower(usern)], hits, hitno);
                                     }
 								}
