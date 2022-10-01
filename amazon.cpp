@@ -104,7 +104,9 @@ int main(int argc, char* argv[])
 								int hitno;
 								if(ss >> usern){
 									ss >> hitno;
-									ds.AddToCart(ds.usermap[convToLower(usern)], hits, hitno);
+                                    if(ds.usermap.find(convToLower(usern))){
+									    ds.AddToCart(ds.usermap[convToLower(usern)], hits, hitno);
+                                    }
 								}
 						}
 						else if( cmd == "VIEWCART"){
