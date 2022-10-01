@@ -9,6 +9,7 @@
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+#include "mydatastore.h"
 
 using namespace std;
 struct ProdNameSorter {
@@ -20,6 +21,7 @@ void displayProducts(vector<Product*>& hits);
 
 int main(int argc, char* argv[])
 {
+	cout << "running"<< endl;
     if(argc < 2) {
         cerr << "Please specify a database file" << endl;
         return 1;
@@ -29,7 +31,7 @@ int main(int argc, char* argv[])
      * Declare your derived DataStore object here replacing
      *  DataStore type to your derived type
      ****************/
-    DataStore ds;
+    MyDataStore ds;
 
 
 
@@ -46,11 +48,12 @@ int main(int argc, char* argv[])
     parser.addSectionParser("users", userSectionParser);
 
     // Now parse the database to populate the DataStore
+		cout << "epic" << endl;
     if( parser.parse(argv[1], ds) ) {
         cerr << "Error parsing!" << endl;
         return 1;
     }
-
+	cout << "fail" << endl;
     cout << "=====================================" << endl;
     cout << "Menu: " << endl;
     cout << "  AND term term ...                  " << endl;
@@ -99,11 +102,26 @@ int main(int argc, char* argv[])
                 }
                 done = true;
             }
-	    /* Add support for other commands here */
-
-
-
-
+						else if( cmd == "ADD"){//
+								string usern;
+								int hitno;
+								if(ss >> usern){
+									ss >> hitno;
+									ds.AddToCart(ds.usermap[usern], hits, hitno);
+								}
+						}
+						else if( cmd == "VIEWCART"){
+								string usern;
+								if(ss >> usern){
+									ds.viewcart(ds.usermap[usern]);
+								}
+						}
+						else if ( cmd == "BUYCART"){
+								string usern;
+								if(ss >> usern){
+									ds.buycart(ds.usermap[usern]);
+								}
+						}
             else {
                 cout << "Unknown command" << endl;
             }
