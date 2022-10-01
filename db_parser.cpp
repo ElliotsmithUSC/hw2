@@ -188,7 +188,7 @@ bool UserSectionParser::parse(
     DataStore& ds,
     int& lineno,
     std::string& errorMsg)
-{
+{ 
     string line;
     while(getline(is, line)) {
         stringstream ss(line);
