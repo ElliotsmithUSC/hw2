@@ -21,7 +21,6 @@ void displayProducts(vector<Product*>& hits);
 
 int main(int argc, char* argv[])
 {
-	cout << "running"<< endl;
     if(argc < 2) {
         cerr << "Please specify a database file" << endl;
         return 1;
@@ -48,12 +47,10 @@ int main(int argc, char* argv[])
     parser.addSectionParser("users", userSectionParser);
 
     // Now parse the database to populate the DataStore
-		cout << "epic" << endl;
     if( parser.parse(argv[1], ds) ) {
         cerr << "Error parsing!" << endl;
         return 1;
     }
-	cout << "fail" << endl;
     cout << "=====================================" << endl;
     cout << "Menu: " << endl;
     cout << "  AND term term ...                  " << endl;
