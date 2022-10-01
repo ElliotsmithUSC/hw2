@@ -20,7 +20,6 @@ class MyDataStore : public DataStore {
 	virtual void buycart(User* u);
 	virtual void dump(std::ostream& ofile);
 
-	protected:
 	std::map<std::string, User*> usermap;
 	std::set<Product*> productset;
 	std::map<std::string, std::vector<Product*>> productmap;
