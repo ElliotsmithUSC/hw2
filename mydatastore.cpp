@@ -119,7 +119,7 @@ while(!cartmap[uname].empty()){
 		F->subtractQty(1);
 		cartmap[uname].pop();
 	}
-	if(F->getQty()==0 || bal<fprice){
+	else if(F->getQty()==0 || bal<fprice){
 		qtemp.push(cartmap[uname].front());
 		cartmap[uname].pop();
 	}
@@ -127,6 +127,7 @@ while(!cartmap[uname].empty()){
 while(!qtemp.empty()){
 	cartmap[uname].push(qtemp.front());
 	qtemp.pop();
+
 }
 }
 void MyDataStore::dump(std::ostream& ofile){//creates an output txt file and adds information
