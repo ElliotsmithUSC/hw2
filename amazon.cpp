@@ -107,19 +107,19 @@ int main(int argc, char* argv[])
 								int hitno;
 								if(ss >> usern){
 									ss >> hitno;
-									ds.AddToCart(ds.usermap[usern], hits, hitno);
+									ds.AddToCart(ds.usermap[convToLower(usern)], hits, hitno);
 								}
 						}
 						else if( cmd == "VIEWCART"){
 								string usern;
 								if(ss >> usern){
-									ds.viewcart(ds.usermap[usern]);
+									ds.viewcart(ds.usermap[convToLower(usern)]);
 								}
 						}
 						else if ( cmd == "BUYCART"){
 								string usern;
 								if(ss >> usern){
-									ds.buycart(ds.usermap[usern]);
+									ds.buycart(ds.usermap[convToLower(usern)]);
 								}
 						}
             else {
