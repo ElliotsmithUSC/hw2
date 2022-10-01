@@ -7,33 +7,44 @@
 using namespace std;
 
 Clothing::Clothing(const std::string name, double price, int qty, const std::string size, const std::string brand) :
-	Product("clothing", name, price, qty),
-	size_(size),
-	brand_(brand)
+	Product("clothing", name, price, qty){
+	size_=size;
+	brand_=brand;
 }
 
 Clothing::~Clothing(){
 
 }
 
-std::set<std::string> Clothing::keywords() const{
+std::set<std::string> Clothing::keywords() const{//stitches all searchable keywords together such as name and brand
 	set<string> keyword;
-	set<string> tempkey;
+	string tempkey;
 	string valget = getName();
 	keyword = parseStringToWords(valget);
 	tempkey = {brand_};
-	keyword = setUnion<string>(keyword, tempkey);
+	keyword.insert(tempkey);
 	return keyword;
 }
 
-std::string Clothing::displayString() const{
-/*std::string returnval = std::string("Title: ") + name_ + (" Written by: ") + author_ + (" Price: ") + price_;
-return returnval;*/
-std::stringstream s;
-s << name_ << " from " << brand_ << " $" << price_ << " " << qty_ << " articles remain";
-string returnstring;
-s >> returnstring;
-return returnstring;
+std::string Clothing::displayString() const{//uses append to output correct format
+	string returnstring(name_);
+	stringstream s1, s2, s3, s4;
+	s1 << price_;
+	s2 << size_;
+	s3 << brand_;
+	s4 << qty_;
+	returnstring.append("\n");
+	returnstring.append("Size:");
+	returnstring.append(s2.str());
+	returnstring.append(" Brand:");
+	returnstring.append(s3.str());
+	returnstring.append("\n");
+	returnstring.append("$");
+	returnstring.append(s1.str());
+	returnstring.append(" ");
+	returnstring.append(s4.str());
+	returnstring.append(" left.");
+	return returnstring;
 }
 
 void Clothing::dump(std::ostream& os) const{
