@@ -112,13 +112,17 @@ int main(int argc, char* argv[])
 						else if( cmd == "VIEWCART"){
 								string usern;
 								if(ss >> usern){
-									ds.viewcart(ds.usermap[convToLower(usern)]);
+                                    if(ds.usermap.find(convToLower(usern)) != ds.usermap.end()){
+									    ds.viewcart(ds.usermap[convToLower(usern)]);
+                                    }
 								}
 						}
 						else if ( cmd == "BUYCART"){
 								string usern;
 								if(ss >> usern){
-									ds.buycart(ds.usermap[convToLower(usern)]);
+                                    if(ds.usermap.find(convToLower(usern)) != ds.usermap.end()){
+									    ds.buycart(ds.usermap[convToLower(usern)]);
+                                    }
 								}
 						}
             else {
