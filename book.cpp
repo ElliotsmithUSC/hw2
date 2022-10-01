@@ -6,37 +6,49 @@
 
 using namespace std;
 
-Book::Book(const std::string category, const std::string name, double price, int qty, const std::string isbn, const std::string author) :
-	Product("book", name, price, qty),
-	isbn_(isbn),
-	author_(author)
+Book::Book(const std::string name, double price, int qty, const std::string isbn, const std::string author) :
+	Product("book", name, price, qty){
+	isbn_=isbn;
+	author_=author;
 }
 
 Book::~Book(){
 
 }
 
-std::set<std::string> Book::keywords() const{
+std::set<std::string> Book::keywords() const{//stitches all searchable keywords together into one set
 	set<string> keyword;
-	set<string> tempkey;
+	set<string> authorget;
+	authorget = parseStringToWords(author_);
+	string tempkey;
 	string valget = getName();
 	keyword = parseStringToWords(valget);
 	tempkey = {isbn_};
-	keyword = setUnion<string>(keyword, tempkey);
-	valget = author_;
-	tempkey = parseStringToWords(valget);
-	keyword = setUnion<string>(keyword, tempkey);
+	keyword.insert(tempkey);
+	cout << "yes" << endl;
+	keyword = setUnion(keyword, authorget);
 	return keyword;
 }
 
-std::string Book::displayString() const{
-/*std::string returnval = std::string("Title: ") + name_ + (" Written by: ") + author_ + (" Price: ") + price_;
-return returnval;*/
-std::stringstream s;
-s << name_ << " by " << author_ << " $" << price_ << " " << qty_ << " copies remain";
-string returnstring;
-s >> returnstring;
-return returnstring;
+std::string Book::displayString() const{//uses .append() to stitch together the correct format. DUE to th
+	string returnstring(name_);//
+	stringstream s1, s2, s3, s4;
+	s1 << price_;
+	s2 << isbn_;
+	s3 << author_;
+	s4 << qty_;
+	returnstring.append("\n");
+	returnstring.append("Author:");
+	returnstring.append(s3.str());
+	returnstring.append(" ISBN:");
+	returnstring.append(s2.str());
+	returnstring.append("\n");
+	returnstring.append("$");
+	returnstring.append(s1.str());
+	returnstring.append(" ");
+	returnstring.append(s4.str());
+	returnstring.append(" left.");
+	return returnstring;
 }
 
 void Book::dump(std::ostream& os) const{
@@ -47,4 +59,3 @@ void Book::dump(std::ostream& os) const{
 	os << isbn_ << endl;
 	os << author_ << endl;
 }
-
