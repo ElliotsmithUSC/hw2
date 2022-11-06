@@ -40,12 +40,10 @@ int main(int argc, char* argv[])
     productSectionParser->addProductParser(new ProductClothingParser);
     productSectionParser->addProductParser(new ProductMovieParser);
     UserSectionParser* userSectionParser = new UserSectionParser;
-
     // Instantiate the parser
     DBParser parser;
     parser.addSectionParser("products", productSectionParser);
     parser.addSectionParser("users", userSectionParser);
-
     // Now parse the database to populate the DataStore
     if( parser.parse(argv[1], ds) ) {
         cerr << "Error parsing!" << endl;
@@ -107,6 +105,9 @@ int main(int argc, char* argv[])
                                     if(ds.usermap.find(convToLower(usern)) != ds.usermap.end()){
 									    ds.AddToCart(ds.usermap[convToLower(usern)], hits, hitno);
                                     }
+                                    else{
+                                        cout << "Invalid request" << endl;
+                                    }
 								}
 						}
 						else if( cmd == "VIEWCART"){
@@ -115,6 +116,9 @@ int main(int argc, char* argv[])
                                     if(ds.usermap.find(convToLower(usern)) != ds.usermap.end()){
 									    ds.viewcart(ds.usermap[convToLower(usern)]);
                                     }
+                                    else{
+                                        cout << "Invalid username" << endl;
+                                    }
 								}
 						}
 						else if ( cmd == "BUYCART"){
@@ -122,6 +126,9 @@ int main(int argc, char* argv[])
 								if(ss >> usern){
                                     if(ds.usermap.find(convToLower(usern)) != ds.usermap.end()){
 									    ds.buycart(ds.usermap[convToLower(usern)]);
+                                    }
+                                    else{
+                                        cout << "Invalid username" << endl;
                                     }
 								}
 						}
