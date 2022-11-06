@@ -25,7 +25,6 @@ std::set<std::string> Book::keywords() const{//stitches all searchable keywords 
 	keyword = parseStringToWords(valget);
 	tempkey = {isbn_};
 	keyword.insert(tempkey);
-	cout << "yes" << endl;
 	keyword = setUnion(keyword, authorget);
 	return keyword;
 }
@@ -38,12 +37,11 @@ std::string Book::displayString() const{//uses .append() to stitch together the 
 	s3 << author_;
 	s4 << qty_;
 	returnstring.append("\n");
-	returnstring.append("Author:");
+	returnstring.append("Author: ");
 	returnstring.append(s3.str());
-	returnstring.append(" ISBN:");
+	returnstring.append(" ISBN: ");
 	returnstring.append(s2.str());
 	returnstring.append("\n");
-	returnstring.append("$");
 	returnstring.append(s1.str());
 	returnstring.append(" ");
 	returnstring.append(s4.str());

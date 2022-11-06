@@ -18,12 +18,15 @@ Clothing::~Clothing(){
 
 std::set<std::string> Clothing::keywords() const{//stitches all searchable keywords together such as name and brand
 	set<string> keyword;
+	set<string> keyword2;
+	set<string> keywordfinal;
 	string tempkey;
 	string valget = getName();
 	keyword = parseStringToWords(valget);
 	tempkey = {brand_};
-	keyword.insert(tempkey);
-	return keyword;
+	keyword2 = parseStringToWords(tempkey);
+	keywordfinal = setUnion(keyword, keyword2);
+	return keywordfinal;
 }
 
 std::string Clothing::displayString() const{//uses append to output correct format
@@ -34,12 +37,11 @@ std::string Clothing::displayString() const{//uses append to output correct form
 	s3 << brand_;
 	s4 << qty_;
 	returnstring.append("\n");
-	returnstring.append("Size:");
+	returnstring.append("Size: ");
 	returnstring.append(s2.str());
-	returnstring.append(" Brand:");
+	returnstring.append(" Brand: ");
 	returnstring.append(s3.str());
 	returnstring.append("\n");
-	returnstring.append("$");
 	returnstring.append(s1.str());
 	returnstring.append(" ");
 	returnstring.append(s4.str());

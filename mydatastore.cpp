@@ -96,7 +96,7 @@ void MyDataStore::viewcart(User* u){//displays the cart of the user
 	int itemnum = 1;
 	string uname = u->getName();
 	while(!cartmap[uname].empty()){
-		cout << "Item " << itemnum << ": " << (cartmap[uname].front())->displayString() << endl;
+		cout << "Item " << itemnum << endl << (cartmap[uname].front())->displayString() << endl;
 		qtemp.push(cartmap[uname].front());
 		cartmap[uname].pop();
 		++itemnum;
@@ -136,9 +136,11 @@ void MyDataStore::dump(std::ostream& ofile){//creates an output txt file and add
 	for(it = productset.begin(); it!=productset.end(); ++it){
 		(*it)->dump(ofile);
 	}
+	ofile << "</products>" << endl;
 	ofile << "<users>" << endl;
 	std::map<string, User*>::iterator st;
 	for(st = usermap.begin(); st!=usermap.end();++st){
 		st->second->dump(ofile);
 	}
+	ofile << "</users>" << endl;
 }

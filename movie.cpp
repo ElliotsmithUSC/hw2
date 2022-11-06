@@ -35,12 +35,11 @@ std::string Movie::displayString() const{//displays product in correct fashion
 	s3 << rating_;
 	s4 << qty_;
 	returnstring.append("\n");
-	returnstring.append("Genre:");
+	returnstring.append("Genre: ");
 	returnstring.append(s2.str());
-	returnstring.append(" Rating:");
+	returnstring.append(" Rating: ");
 	returnstring.append(s3.str());
 	returnstring.append("\n");
-	returnstring.append("$");
 	returnstring.append(s1.str());
 	returnstring.append(" ");
 	returnstring.append(s4.str());
